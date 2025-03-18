@@ -1,3 +1,7 @@
+<?php
+session_start();
+include "koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,15 +66,14 @@
 
         <section class="section">
             <?php if (isset($_GET['page'])) {
-                if (file_exists('content/'. $_GET['page'] . ".php")) {
-                   include 'content/' . $_GET['page'] . ".php";
+                if (file_exists('content/' . $_GET['page'] . ".php")) {
+                    include 'content/' . $_GET['page'] . ".php";
                 }
-            }else{
-                include"content/home.php";
-
+            } else {
+                include "content/home.php";
             }
             ?>
-            
+
         </section>
 
     </main><!-- End #main -->
