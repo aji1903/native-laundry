@@ -1,19 +1,17 @@
 <?php
-
-
 // include "../koneksi.php";
-$queryuser = mysqli_query($connect, "SELECT * FROM users ORDER BY id DESC");
-$rowuser = mysqli_fetch_all($queryuser, MYSQLI_ASSOC);
+$queryService = mysqli_query($connect, "SELECT * FROM services ORDER BY id DESC");
+$rowService = mysqli_fetch_all($queryService, MYSQLI_ASSOC);
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $service_name = $_POST['service_name'];
+    $service_price = $_POST['service_price'];
+    $service_desc = $_POST['service_desc'];
 
-    $q_delete = mysqli_query($connect, "DELETE FROM users WHERE id='$id'");
+    $q_delete = mysqli_query($connect, "DELETE FROM services WHERE id='$id'");
     if ($q_delete) {
-        header("location:?page=user&hapus=berhasil");
+        header("location:?page=service&hapus=berhasil");
     }
 }
 ?>
@@ -21,7 +19,7 @@ if (isset($_GET['delete'])) {
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header text-center ">
-                <h3>Data user</h3>
+                <h3>Data Service</h3>
             </div>
             <?php if (isset($_GET['hapus']) && $_GET['hapus'] == "berhasil") {
             ?>
@@ -49,34 +47,34 @@ if (isset($_GET['delete'])) {
             ?>
             <div class="card-body"></div>
             <div align="right" class="mb-5">
-                <a href="?page=add-user" class="btn btn-primary">Create New user </a>
+                <a href="?page=add-service" class="btn btn-primary">Create New Service </a>
             </div>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-
+                        <th>Nama Service</th>
+                        <th>Service Price</th>
+                        <th>Service Desc</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $no = 1;
-                    foreach ($rowuser as $row) {
+                    foreach ($rowService as $row) {
 
 
                     ?>
 
                         <tr>
                             <td><?= $no++ ?></td>
-                            <td><?= $row['nama'] ?></td>
-                            <td><?= $row['email'] ?></td>
-
+                            <td><?= $row['service_name'] ?></td>
+                            <td><?= $row['service_price'] ?></td>
+                            <td><?= $row['service_desc'] ?></td>
                             <td>
-                                <a href="?page=add-user&edit=<?= $row['id'] ?>" class="btn btn-secondary btn-sm">Edit</a>
-                                <a href="?page=user&delete=<?= $row['id'] ?>"
+                                <a href="?page=add-service&edit=<?= $row['id'] ?>" class="btn btn-secondary btn-sm">Edit</a>
+                                <a href="?page=service&delete=<?= $row['id'] ?>"
                                     onclick="return confirm('Are You Sure??')" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>

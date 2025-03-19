@@ -1,19 +1,20 @@
 <?php
 
+$query = mysqli_query($connect, "SELECT trans_order.*, customers.customer_name FROM trans_order LEFT JOIN customers ON customers.id=trans_order.id_customer
+WHERE deleted_at = 0 ORDER BY trans_order.id DESC");
+$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 // include "../koneksi.php";
-$queryuser = mysqli_query($connect, "SELECT * FROM users ORDER BY id DESC");
-$rowuser = mysqli_fetch_all($queryuser, MYSQLI_ASSOC);
+
+$query_trans = mysqli_query($connect, "SELECT * FROM trans_order ORDER BY id DESC");
+$row_trans = mysqli_fetch_all($query_trans, MYSQLI_ASSOC);
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
-    $q_delete = mysqli_query($connect, "DELETE FROM users WHERE id='$id'");
+    $q_delete = mysqli_query($connect, "UPDATE trans_order SET deleted_at = 1 WHERE id='$id'");
     if ($q_delete) {
-        header("location:?page=user&hapus=berhasil");
+        header("location:?page=trans_order&hapus=berhasil");
     }
 }
 ?>
@@ -21,7 +22,7 @@ if (isset($_GET['delete'])) {
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header text-center ">
-                <h3>Data user</h3>
+                <h3>Data Transaction</h3>
             </div>
             <?php if (isset($_GET['hapus']) && $_GET['hapus'] == "berhasil") {
             ?>
@@ -49,7 +50,7 @@ if (isset($_GET['delete'])) {
             ?>
             <div class="card-body"></div>
             <div align="right" class="mb-5">
-                <a href="?page=add-user" class="btn btn-primary">Create New user </a>
+                <a href="?page=add-trans-order" class="btn btn-primary">Create New Transaction </a>
             </div>
             <table class="table table-bordered">
                 <thead>
@@ -64,15 +65,17 @@ if (isset($_GET['delete'])) {
                 <tbody>
                     <?php
                     $no = 1;
-                    foreach ($rowuser as $row) {
+                    foreach ($row_trans as $row) {
 
 
                     ?>
 
                         <tr>
                             <td><?= $no++ ?></td>
-                            <td><?= $row['nama'] ?></td>
-                            <td><?= $row['email'] ?></td>
+                            <td><?= $row['trans_code'] ?></td>
+                            <td><?= $row['customer_name'] ?></td>
+                            <td><?= $row['status'] ?></td>
+
 
                             <td>
                                 <a href="?page=add-user&edit=<?= $row['id'] ?>" class="btn btn-secondary btn-sm">Edit</a>

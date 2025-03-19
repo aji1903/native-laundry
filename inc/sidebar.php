@@ -21,6 +21,11 @@
                      </a>
                  </li>
                  <li>
+                     <a href="?page=service">
+                         <i class="bi bi-circle"></i><span>Service</span>
+                     </a>
+                 </li>
+                 <li>
                      <a href="?page=paket">
                          <i class="bi bi-circle"></i><span>Paket</span>
                      </a>
@@ -46,9 +51,9 @@
          <li class="nav-heading">Pages</li>
 
          <li class="nav-item">
-             <a class="nav-link collapsed" href="users-profile.html">
+             <a class="nav-link collapsed" href="?page=trans-order">
                  <i class="bi bi-person"></i>
-                 <span>Profile</span>
+                 <span>Data Transaction</span>
              </a>
          </li><!-- End Profile Page Nav -->
 
@@ -57,14 +62,14 @@
          <li class="nav-item">
              <a class="nav-link collapsed" href="pages-contact.html">
                  <i class="bi bi-envelope"></i>
-                 <span>Contact</span>
+                 <span>Pickup Laundry</span>
              </a>
          </li><!-- End Contact Page Nav -->
 
          <li class="nav-item">
              <a class="nav-link collapsed" href="pages-register.html">
                  <i class="bi bi-card-list"></i>
-                 <span>Register</span>
+                 <span>Report</span>
              </a>
          </li><!-- End Register Page Nav -->
 

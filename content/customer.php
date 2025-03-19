@@ -60,8 +60,9 @@ if (isset($_GET['delete'])) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($rowCustomer as $row) {
-                        $no = 1;
+                    <?php $no = 1;
+                    foreach ($rowCustomer as $row) {
+
 
                     ?>
 
