@@ -99,10 +99,49 @@ include "koneksi.php";
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script> -->
     <script>
+        $('#id_service').change(function() {
+            let id_service = $(this).val();
+            $.ajax({
+                url: 'get-service.php?id_service=' + id_service,
+                method: "get",
+                dataType: 'json',
+                success: function(res) {
+                    $('#service_price').val(res.data.service_price)
+                }
+
+            });
+        });
+
         $('.add-row').click(function() {
-            alert('Testing')
+            let service_name = $('#id_service').find("option:selected").text();
+            let service_price = $('#service_price').val();
+            let newrow = "";
+            newrow += "<tr>";
+            newrow += "<td>" + service_name + "</td>";
+            newrow += "<td>" + service_price.toLocaleString() + "</td>";
+
+            // newrow += `<td> ${service_name}   </td>`;
+            newrow += "<td><input class='form-control' name='qty[]' type='number'</td>";
+            newrow += "<td><input class='form-control' name='notes[]' type='text'</td>";
+            newrow += "<td><button type='button' class='btn btn-danger btn-sm remove' >Remove</button></td>";
+            newrow += "</tr>";
+            // append berfungsi untuk memanggil variabel newrow jika di klik maka function nya bekerja
+            // . apabila menggunakan class dan menggunakan # apabila menggunakan id.
+
+            $('#add-table tbody').append(newrow);
+            // jika pada table tidak menggunakan attribut type='button' maka menggunakan event/param
+            // $('.remove').click(function(event) {
+            //     event.preventDefault();
+            //     $(this).closest('tr').remove();
+            // });
+
+            $('.remove').click(function() {
+                $(this).closest('tr').remove();
+            });
+
         });
     </script>
 
